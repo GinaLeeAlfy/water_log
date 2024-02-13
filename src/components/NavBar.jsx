@@ -6,7 +6,7 @@ const NavBar = () => {
   const { isAuthenticated } = useAuth0();
 
   return (
-    <nav className="flex flex-col items-center justify-center gap-2 px-1 py-1 sm:flex sm:py-7">
+    <nav className="flex w-full flex-col items-center justify-center gap-2 px-1 py-1 sm:flex sm:py-7">
       {!isAuthenticated ? <LoginButton /> : <LogoutButton />}
 
       <h1 className=" font-bold ">Water Log</h1>
