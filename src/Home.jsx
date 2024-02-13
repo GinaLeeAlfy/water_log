@@ -1,14 +1,13 @@
-import { useAuth0 } from "@auth0/auth0-react";
-import LoginButton from "./components/LoginButton";
-import LogoutButton from "./components/LogoutButton";
+import NavBar from "./components/NavBar";
 
 const Home = () => {
-  const { isAuthenticated } = useAuth0();
-
   return (
     <div>
-      {!isAuthenticated ? <LoginButton /> : <LogoutButton />}
-      <h1 className="font-bold">Water Log</h1>
+      <NavBar />
+      <section className="flex flex-col text-center">
+        <p>On average people should drink about 64oz of water a day.</p>
+        <p>Start logging your water for your wellness.</p>
+      </section>
     </div>
   );
 };
