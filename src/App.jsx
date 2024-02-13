@@ -1,16 +1,26 @@
-import LoginButton from "./LoginButton";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Routes, Route } from "react-router-dom";
+import Home from "./Home";
+import Logger from "./Logger";
 
-import "./App.css";
+const App = () => {
+  const { isLoading } = useAuth0();
 
-function App() {
+  if (isLoading) {
+    return (
+      <div>
+        <p>Loading</p>
+      </div>
+    );
+  }
   return (
     <>
-      <h1 className="font-bold">Water Log</h1>
-      <div className="card">
-        <LoginButton />
-      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/callback" element={<Logger />} />
+      </Routes>
     </>
   );
-}
+};
 
 export default App;
