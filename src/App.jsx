@@ -1,20 +1,13 @@
-import { useState } from "react";
+import LoginButton from "./LoginButton";
 
 import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <h1 className="font-bold">Vite + React</h1>
+      <h1 className="font-bold">Water Log</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+        <LoginButton />
       </div>
     </>
   );
