@@ -29,11 +29,11 @@ const Logger = () => {
         currentDate.toISOString(),
       );
       setConsumed(waterLogsFromServer.amount);
-      setPercentage(
-        (
-          Math.ceil(((waterLogsFromServer.amount / goal) * 100) / 5) * 5
-        ).toString(),
-      );
+      // setPercentage(
+      //   (
+      //     Math.ceil(((waterLogsFromServer.amount / goal) * 100) / 5) * 5
+      //   ).toString(),
+      // );
 
       setLogs(waterLogsFromServer.logs);
     };
@@ -53,9 +53,9 @@ const Logger = () => {
     );
 
     setConsumed(waterLogsFromServer.amount);
-    setPercentage(
-      Math.ceil(((waterLogsFromServer.amount / goal) * 100) / 5) * 5,
-    );
+    // setPercentage(
+    //   Math.ceil(((waterLogsFromServer.amount / goal) * 100) / 5) * 5,
+    // );
     setLogs(waterLogsFromServer.logs);
   };
 
@@ -68,9 +68,9 @@ const Logger = () => {
       currentDate.toISOString(),
     );
     setConsumed(waterLogsFromServer.amount);
-    setPercentage(
-      Math.ceil(((waterLogsFromServer.amount / goal) * 100) / 5) * 5,
-    );
+    // setPercentage(
+    //   Math.ceil(((waterLogsFromServer.amount / goal) * 100) / 5) * 5,
+    // );
     setLogs(waterLogsFromServer.logs);
   };
 
@@ -78,7 +78,7 @@ const Logger = () => {
     <div className="flex min-w-60 flex-col items-center">
       <NavBar />
       <section
-        className={`container prose mt-4 flex flex-col items-center border-2 border-blue-950 bg-gradient-to-t from-blue-300 from-${percentage}% via-blue-50 via-${percentage + 5}% to-white pt-4 text-center`}
+        className={`container prose mt-4 flex flex-col items-center border-2 border-blue-950 bg-gradient-to-t from-blue-300  to-blue-50 pt-4 text-center`}
       >
         <h2
           className={
