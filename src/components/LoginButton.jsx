@@ -6,7 +6,7 @@ const LoginButton = () => {
   return (
     <button
       onClick={() => loginWithRedirect()}
-      className="right-3 top-3 self-end rounded border-2 border-gray-400 bg-white px-4 py-2 sm:absolute"
+      className="rounded border-2 border-gray-400 bg-white px-2 py-2 sm:px-4"
     >
       Log In/Sign up with Google
     </button>
