@@ -4,7 +4,7 @@ const Home = () => {
   return (
     <div>
       <NavBar />
-      <section className="flex flex-col text-center">
+      <section className="prose flex flex-col text-center">
         <p>On average people should drink about 64oz of water a day.</p>
         <p>Start logging your water for your wellness.</p>
       </section>
