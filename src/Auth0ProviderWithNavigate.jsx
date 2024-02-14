@@ -6,6 +6,7 @@ const Auth0ProviderWithNavigate = ({ children }) => {
 
   const domain = import.meta.env.VITE_AUTH0_DOMAIN;
   const clientId = import.meta.env.VITE_AUTH0_CLIENT_ID;
+  const audience = import.meta.env.VITE_AUTH0_AUDIENCE;
   const redirectUri = import.meta.env.VITE_AUTH0_CALLBACK_URL;
 
   const onRedirectCallback = (appState) => {
@@ -21,6 +22,7 @@ const Auth0ProviderWithNavigate = ({ children }) => {
       domain={domain}
       clientId={clientId}
       authorizationParams={{
+        audience,
         redirect_uri: redirectUri,
       }}
       onRedirectCallback={onRedirectCallback}
