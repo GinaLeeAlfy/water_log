@@ -1,10 +1,11 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 import NavBar from "../components/NavBar";
+import LogEntries from "../components/LogEntries";
+import Spinner from "../components/Spinner";
 import {
   createUser,
   createWaterLog,
-  deleteLog,
   getWaterLogsForTheDay,
 } from "../services/api";
 
@@ -17,6 +18,7 @@ const Logger = () => {
   const [percentage, setPercentage] = useState("10");
   const [userId, setUserID] = useState("");
   const [isLoading, setIsLoading] = useState(true);
+  const [isChanging, setIsChanging] = useState(false);
 
   const { getAccessTokenSilently, user } = useAuth0();
 
@@ -48,12 +50,13 @@ const Logger = () => {
     return (
       <div className="flex min-w-60 flex-col items-center">
         <NavBar />
-        <h2 className="animate-spin text-5xl">🌀</h2>
+        <Spinner />
       </div>
     );
   }
 
   const addWater = async (amount) => {
+    setIsChanging(true);
     const accessToken = await getAccessTokenSilently();
     const currentDate = new Date();
     await createWaterLog(accessToken, {
@@ -70,21 +73,7 @@ const Logger = () => {
     //   Math.ceil(((waterLogsFromServer.amount / goal) * 100) / 5) * 5,
     // );
     setLogs(waterLogsFromServer.logs);
-  };
-
-  const deleteEntry = async (id) => {
-    const accessToken = await getAccessTokenSilently();
-    await deleteLog(accessToken, id);
-    const currentDate = new Date();
-    const waterLogsFromServer = await getWaterLogsForTheDay(
-      accessToken,
-      currentDate.toISOString(),
-    );
-    setConsumed(waterLogsFromServer.amount);
-    // setPercentage(
-    //   Math.ceil(((waterLogsFromServer.amount / goal) * 100) / 5) * 5,
-    // );
-    setLogs(waterLogsFromServer.logs);
+    setIsChanging(false);
   };
 
   return (
@@ -155,35 +144,15 @@ const Logger = () => {
             hover:bg-white hover:text-blue-400"
           />
         </form>
-        <div className="flex w-full flex-col items-center">
-          <h3>Today&apos;s Entries</h3>
-          <div className="flex w-full flex-col items-center divide-y-2 divide-blue-950">
-            {!logs.length ? (
-              <p>No entries yet</p>
-            ) : (
-              logs.map((log) => (
-                <div
-                  className="align-items-center grid w-full grid-cols-3 justify-items-center gap-12 py-2"
-                  key={log.id}
-                >
-                  <div></div>
-                  <p className="not-prose">
-                    <span className="font-bold">{log.amount} </span>oz
-                  </p>
-                  <button
-                    className="mr-2 aspect-square justify-self-end rounded-full border-2 border-current bg-white px-3 text-red-600 hover:text-blue-600"
-                    onClick={() => {
-                      deleteEntry(log.id);
-                    }}
-                  >
-                    X
-                  </button>
-                </div>
-              ))
-            )}
-          </div>
-        </div>
+        <LogEntries
+          setConsumed={setConsumed}
+          getAccessTokenSilently={getAccessTokenSilently}
+          setLogs={setLogs}
+          logs={logs}
+          setIsChanging={setIsChanging}
+        />
       </section>
+      {isChanging ? <Spinner /> : null}
     </div>
   );
 };
