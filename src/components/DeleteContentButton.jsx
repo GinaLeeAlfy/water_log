@@ -5,7 +5,7 @@ import { deleteUser } from "../services/api";
 import { useNavigate } from "react-router-dom";
 
 const DeleteContentButton = ({ userId }) => {
-  const { getAccessTokenSilently } = useAuth0();
+  const { getAccessTokenSilently, logout } = useAuth0();
 
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
@@ -15,6 +15,7 @@ const DeleteContentButton = ({ userId }) => {
     console.log(userId);
     const response = await deleteUser(accessToken, userId);
     console.log(response);
+    logout({ logoutParams: { returnTo: window.location.origin } });
     navigate("/");
   };
 
