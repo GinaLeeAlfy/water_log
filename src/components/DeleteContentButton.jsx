@@ -1,9 +1,22 @@
 import { useState } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 import Modal from "./Modal";
+import { deleteUser } from "../services/api";
+import { useNavigate } from "react-router-dom";
 
-const DeleteContentButton = () => {
+const DeleteContentButton = ({ userId }) => {
+  const { getAccessTokenSilently } = useAuth0();
+
+  const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
-  const deleteProfile = () => {};
+  const deleteProfile = async () => {
+    const accessToken = await getAccessTokenSilently();
+
+    console.log(userId);
+    const response = await deleteUser(accessToken, userId);
+    console.log(response);
+    navigate("/");
+  };
 
   return (
     <div>
@@ -15,7 +28,7 @@ const DeleteContentButton = () => {
       </button>
       {showModal ? (
         <Modal>
-          <div className=" prose fixed z-10 flex flex-col gap-4  border-2 border-red-600 bg-white p-10 text-center">
+          <div className=" container prose fixed left-4 top-4 z-10 flex flex-col gap-4 border-2 border-red-600 bg-white p-10 text-center">
             <h3>Are you sure you would like to delete your profile?</h3>
             <p>
               This will delete <strong className="text-red-600">ALL</strong> of

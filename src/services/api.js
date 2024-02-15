@@ -47,3 +47,13 @@ export const deleteLog = async (accessToken, id) => {
   });
   return response;
 };
+
+export const deleteUser = async (accessToken, id) => {
+  const response = await fetch(`http://localhost:8000/users/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+  return response;
+};

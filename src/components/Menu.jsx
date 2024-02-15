@@ -4,7 +4,7 @@ import LogoutButton from "./LogoutButton";
 import { useAuth0 } from "@auth0/auth0-react";
 import DeleteContentButton from "./DeleteContentButton";
 
-const Menu = () => {
+const Menu = ({ userId }) => {
   const { isAuthenticated } = useAuth0();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -19,7 +19,7 @@ const Menu = () => {
           <LoginButton />
         ) : (
           <div className="flex gap-2">
-            <DeleteContentButton /> <LogoutButton />
+            <DeleteContentButton userId={userId} /> <LogoutButton />
           </div>
         )
       ) : null}

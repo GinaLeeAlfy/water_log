@@ -15,6 +15,7 @@ const Logger = () => {
   const [isMetricUnits, setIsMetricUnits] = useState(false);
   const [logs, setLogs] = useState([]);
   const [percentage, setPercentage] = useState("10");
+  const [userId, setUserID] = useState("");
 
   const { getAccessTokenSilently, user } = useAuth0();
 
@@ -28,6 +29,8 @@ const Logger = () => {
         accessToken,
         currentDate.toISOString(),
       );
+      console.log(response);
+      setUserID(response.id);
       setConsumed(waterLogsFromServer.amount);
       // setPercentage(
       //   (
@@ -76,13 +79,13 @@ const Logger = () => {
 
   return (
     <div className="flex min-w-60 flex-col items-center">
-      <NavBar />
+      <NavBar userId={userId} />
       <section
         className={`container prose mt-4 flex flex-col items-center border-2 border-blue-950 bg-gradient-to-t from-blue-300  to-blue-50 pt-4 text-center`}
       >
         <h2
           className={
-            consumed >= goal
+            Number(consumed) >= Number(goal)
               ? "inline-block bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 bg-clip-text text-transparent"
               : ""
           }
