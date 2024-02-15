@@ -12,8 +12,7 @@ const DeleteContentButton = ({ userId }) => {
   const deleteProfile = async () => {
     const accessToken = await getAccessTokenSilently();
 
-    const response = await deleteUser(accessToken, userId);
-    console.log(response);
+    await deleteUser(accessToken, userId);
     logout({ logoutParams: { returnTo: window.location.origin } });
     navigate("/");
   };

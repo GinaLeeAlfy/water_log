@@ -14,7 +14,6 @@ export const createUser = async (accessToken, user) => {
 };
 
 export const createWaterLog = async (accessToken, waterLog) => {
-  console.log(waterLog);
   const response = await fetch("http://localhost:8000/water_logs", {
     method: "POST",
     headers: {
