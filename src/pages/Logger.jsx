@@ -24,12 +24,10 @@ const Logger = () => {
       const accessToken = await getAccessTokenSilently();
       const response = await createUser(accessToken, user);
       const currentDate = new Date();
-      currentDate.setHours(currentDate.getHours());
       const waterLogsFromServer = await getWaterLogsForTheDay(
         accessToken,
         currentDate.toISOString(),
       );
-      console.log(response);
       setUserID(response.id);
       setConsumed(waterLogsFromServer.amount);
       // setPercentage(
