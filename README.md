@@ -1,8 +1,11 @@
-# React + Vite
+# React Tailwind Water Log
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This website lets the user register an account using Auth0 and log their water intake for the day.
 
-Currently, two official plugins are available:
+[Auth0](https://auth0.com/) is used for the authentication/authorization system.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+
+![image](https://github.com/GinaLeeAlfy/water_log/assets/19276818/340f67eb-e01c-42c0-974c-75454c93957a)
+
+
