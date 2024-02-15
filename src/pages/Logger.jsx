@@ -16,11 +16,13 @@ const Logger = () => {
   const [logs, setLogs] = useState([]);
   const [percentage, setPercentage] = useState("10");
   const [userId, setUserID] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   const { getAccessTokenSilently, user } = useAuth0();
 
   useEffect(() => {
     const getMessage = async () => {
+      setIsLoading(true);
       const accessToken = await getAccessTokenSilently();
       const response = await createUser(accessToken, user);
       const currentDate = new Date();
@@ -37,9 +39,19 @@ const Logger = () => {
       // );
 
       setLogs(waterLogsFromServer.logs);
+      setIsLoading(false);
     };
     getMessage();
   }, [getAccessTokenSilently, user]);
+
+  if (isLoading) {
+    return (
+      <div className="flex min-w-60 flex-col items-center">
+        <NavBar />
+        <h2 className="animate-spin text-5xl">🌀</h2>
+      </div>
+    );
+  }
 
   const addWater = async (amount) => {
     const accessToken = await getAccessTokenSilently();

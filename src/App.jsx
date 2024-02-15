@@ -12,6 +12,7 @@ const App = () => {
     return (
       <div className="flex min-w-60 flex-col items-center">
         <NavBar />
+        <h2 className="animate-spin text-5xl">🌀</h2>
       </div>
     );
   }
