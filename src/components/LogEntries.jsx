@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { deleteLog, getWaterLogsForTheDay } from "../services/api";
 
 const LogEntries = ({
