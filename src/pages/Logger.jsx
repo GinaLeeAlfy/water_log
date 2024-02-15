@@ -1,12 +1,12 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
-import NavBar from "./components/NavBar";
+import NavBar from "../components/NavBar";
 import {
   createUser,
   createWaterLog,
   deleteLog,
   getWaterLogsForTheDay,
-} from "./services/api";
+} from "../services/api";
 
 const Logger = () => {
   const [consumed, setConsumed] = useState("0");
@@ -24,7 +24,7 @@ const Logger = () => {
       const accessToken = await getAccessTokenSilently();
       const response = await createUser(accessToken, user);
       const currentDate = new Date();
-
+      currentDate.setHours(currentDate.getHours());
       const waterLogsFromServer = await getWaterLogsForTheDay(
         accessToken,
         currentDate.toISOString(),
@@ -129,7 +129,7 @@ const Logger = () => {
               onChange={(e) => {
                 setAdding(e.target.value);
               }}
-              className="w-10 text-end outline-blue-600"
+              className=" w-16 p-1 text-end outline-blue-600"
             />
             <p>oz</p>
             {/* <select name="add-measurement" id="add-measurement">
