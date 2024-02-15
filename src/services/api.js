@@ -30,9 +30,11 @@ export const createWaterLog = async (accessToken, waterLog) => {
 };
 
 export const getWaterLogsForTheDay = async (accessToken, date) => {
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const response = await fetch(`http://localhost:8000/water_logs/${date}`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
+      timezone: timeZone,
     },
   });
   return response.json();
