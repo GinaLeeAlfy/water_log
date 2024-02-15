@@ -12,7 +12,6 @@ const DeleteContentButton = ({ userId }) => {
   const deleteProfile = async () => {
     const accessToken = await getAccessTokenSilently();
 
-    console.log(userId);
     const response = await deleteUser(accessToken, userId);
     console.log(response);
     logout({ logoutParams: { returnTo: window.location.origin } });
@@ -22,7 +21,7 @@ const DeleteContentButton = ({ userId }) => {
   return (
     <div>
       <button
-        className="rounded border-2 border-red-600 bg-white px-2 py-2 sm:px-4"
+        className="rounded border-2 border-red-600 bg-white px-2 py-2 hover:bg-red-600 hover:text-white sm:px-4"
         onClick={() => setShowModal(true)}
       >
         Delete Profile

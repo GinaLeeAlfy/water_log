@@ -24,7 +24,7 @@ const Menu = ({ userId }) => {
         )
       ) : null}
       <button
-        className="rounded border-2 border-gray-400 bg-white px-4 py-2 "
+        className="rounded border-2 border-gray-400 bg-white px-4 py-2 hover:border-blue-600 "
         onClick={toggle}
       >
         &#9776;
