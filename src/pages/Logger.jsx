@@ -15,7 +15,7 @@ const Logger = () => {
   const [goal, setGoal] = useState("64");
   const [isMetricUnits, setIsMetricUnits] = useState(false);
   const [logs, setLogs] = useState([]);
-  const [percentage, setPercentage] = useState("10");
+  // const [percentage, setPercentage] = useState("10");
   const [userId, setUserID] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isChanging, setIsChanging] = useState(false);
