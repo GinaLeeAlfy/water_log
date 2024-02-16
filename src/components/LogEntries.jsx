@@ -7,6 +7,7 @@ const LogEntries = ({
   getAccessTokenSilently,
   setIsChanging,
 }) => {
+  //delete an entry from today's log
   const deleteEntry = async (id) => {
     setIsChanging(true);
     const accessToken = await getAccessTokenSilently();
@@ -16,11 +17,14 @@ const LogEntries = ({
       accessToken,
       currentDate.toISOString(),
     );
+
+    //pull out as function
     setConsumed(waterLogsFromServer.amount);
+    setLogs(waterLogsFromServer.logs);
+
     // setPercentage(
     //   Math.ceil(((waterLogsFromServer.amount / goal) * 100) / 5) * 5,
     // );
-    setLogs(waterLogsFromServer.logs);
     setIsChanging(false);
   };
 

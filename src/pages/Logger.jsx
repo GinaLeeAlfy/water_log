@@ -16,12 +16,14 @@ const Logger = () => {
   const [isMetricUnits, setIsMetricUnits] = useState(false);
   const [logs, setLogs] = useState([]);
   // const [percentage, setPercentage] = useState("10");
+  //consider adding context for userID in order not to drill down
   const [userId, setUserID] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [isChanging, setIsChanging] = useState(false);
 
   const { getAccessTokenSilently, user } = useAuth0();
 
+  //load user info once
   useEffect(() => {
     const getMessage = async () => {
       setIsLoading(true);
@@ -33,19 +35,22 @@ const Logger = () => {
         currentDate.toISOString(),
       );
       setUserID(response.id);
+      //consider pulling out setConsumed and setLogs as function
       setConsumed(waterLogsFromServer.amount);
+      setLogs(waterLogsFromServer.logs);
+
+      //might try to make style dynamic with this later
       // setPercentage(
       //   (
       //     Math.ceil(((waterLogsFromServer.amount / goal) * 100) / 5) * 5
       //   ).toString(),
       // );
 
-      setLogs(waterLogsFromServer.logs);
       setIsLoading(false);
     };
     getMessage();
   }, [getAccessTokenSilently, user]);
-
+  //if loading don't show table
   if (isLoading) {
     return (
       <div className="flex min-w-60 flex-col items-center">
@@ -55,7 +60,9 @@ const Logger = () => {
     );
   }
 
+  //post to api amount of water drank
   const addWater = async (amount) => {
+    //display loading below table
     setIsChanging(true);
     const accessToken = await getAccessTokenSilently();
     const currentDate = new Date();
@@ -68,11 +75,13 @@ const Logger = () => {
       currentDate.toISOString(),
     );
 
+    //pull out as function
     setConsumed(waterLogsFromServer.amount);
+    setLogs(waterLogsFromServer.logs);
+
     // setPercentage(
     //   Math.ceil(((waterLogsFromServer.amount / goal) * 100) / 5) * 5,
     // );
-    setLogs(waterLogsFromServer.logs);
     setIsChanging(false);
   };
 
@@ -84,6 +93,7 @@ const Logger = () => {
       >
         <h2
           className={
+            //color words when goal is met
             Number(consumed) >= Number(goal)
               ? "inline-block bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 bg-clip-text text-transparent"
               : ""
@@ -100,7 +110,9 @@ const Logger = () => {
           }}
           className="flex w-fit items-center space-x-3 border-y-2 border-blue-950 p-1"
         >
-          {/* <fieldset className="flex flex-col items-center gap-2">
+          {
+            //TODO might use in order to set goal in future
+            /* <fieldset className="flex flex-col items-center gap-2">
             <label htmlFor="goal">Set your Goal:</label>
             <div>
               <input
@@ -114,7 +126,8 @@ const Logger = () => {
                 <option value="ml">ml</option>
               </select>
             </div>
-          </fieldset> */}
+          </fieldset> */
+          }
           <fieldset className="flex items-center gap-2">
             <label htmlFor="drank">Add Water:</label>
 
@@ -131,10 +144,13 @@ const Logger = () => {
               className=" w-16 p-1 text-end outline-blue-600"
             />
             <p>oz</p>
-            {/* <select name="add-measurement" id="add-measurement">
+            {
+              //TODO can use to set measurement units in future
+              /* <select name="add-measurement" id="add-measurement">
                 <option value="oz">oz</option>
                 <option value="ml">ml</option>
-              </select> */}
+              </select> */
+            }
           </fieldset>
           <input
             type="submit"
