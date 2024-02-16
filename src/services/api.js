@@ -18,11 +18,13 @@ export const createUser = async (accessToken, user) => {
 };
 
 export const createWaterLog = async (accessToken, waterLog) => {
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const response = await fetch(templateUrl("water_logs"), {
     method: "POST",
     headers: {
       Authorization: `Bearer ${accessToken}`,
       "Content-Type": "application/json",
+      timezone: timeZone,
     },
     body: JSON.stringify({
       amount: waterLog.amount,
